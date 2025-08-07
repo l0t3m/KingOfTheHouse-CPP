@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
+#include "Functions.h"
 
 using namespace std;
 
@@ -54,5 +55,16 @@ namespace Navigation
 		Room() : Name("Unset Room") { }
 		Room(string name) : Name(name) { }
 		Room(string name, int minLevel, int maxLevel) : Name(name), MinLevel(minLevel), MaxLevel(maxLevel), DangerStatus(RoomDangerStatus::Dangerous) { }
+	
+		// Methods:
+		Utils::ConsoleColor GetDangerStatusColor() {
+			switch (DangerStatus) {
+			case RoomDangerStatus::Safe: return Utils::ConsoleColor::Green; break;
+			case RoomDangerStatus::Neutral: return Utils::ConsoleColor::Yellow; break;
+			case RoomDangerStatus::Dangerous: return Utils::ConsoleColor::Red; break;
+			default:
+				return Utils::ConsoleColor::White; break;
+			}
+		}
 	};
 }

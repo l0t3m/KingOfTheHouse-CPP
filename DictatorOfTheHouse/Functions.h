@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 #include "Exploration.h"
 #include "Map.h"
 
@@ -61,6 +62,10 @@ namespace Utils
 	{
 		Room* CurrentRoom = Game::CurrentRoom;
 		// player
+
+		/*PrintAndColor("You're currently in " + CurrentRoom->Name + ". " + Navigation::StatusToString(CurrentRoom->DangerStatus), 
+			Navigation::StatusToString(CurrentRoom->DangerStatus),
+			CurrentRoom->GetDangerStatusColor());*/
 
 		cout << "You're currently in " << CurrentRoom->Name << ". " << StatusToString(CurrentRoom->DangerStatus) << endl;
 		cout << CurrentRoom->Description << endl;
