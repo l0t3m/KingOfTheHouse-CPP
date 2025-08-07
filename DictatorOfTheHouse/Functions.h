@@ -77,9 +77,10 @@ namespace Utils
 			return Utils::ConsoleColor::BrightCyan; 
 			break;
 		case RoomDangerStatus::Dangerous: 
-			if (room->IsBossRoom)
-				return Utils::ConsoleColor::Red;
 			return Utils::ConsoleColor::Yellow; 
+			break;
+		case RoomDangerStatus::Boss:
+			return Utils::ConsoleColor::Red;
 			break;
 		default:
 			return Utils::ConsoleColor::White; 
@@ -103,9 +104,10 @@ namespace Utils
 			return Utils::ConsoleColor::BrightCyan;
 			break;
 		case RoomDangerStatus::Dangerous:
-			if (Game::CurrentRoom->IsBossRoom)
-				return Utils::ConsoleColor::Red;
 			return Utils::ConsoleColor::Yellow;
+			break;
+		case RoomDangerStatus::Boss:
+			return Utils::ConsoleColor::Red;
 			break;
 		default:
 			return Utils::ConsoleColor::White;
@@ -137,5 +139,23 @@ namespace Utils
 				to_string(CurrentRoom->ConnectedRooms.size()));
 		else
 			Utils::PrintAndColor("You notice a single path you can take.", "single");
+
+		cout << "\nWhat would you like to do?";
+		cout << "\n1. Examine the room";
+		cout << "\n2. View stats and inventory";
+		cout << "\n3. Leave the room";
+
+		if (CurrentRoom->DiscoveredStatus)
+		{
+			if (CurrentRoom->DangerStatus == Navigation::RoomDangerStatus::Dangerous)
+			{
+				Utils::PrintAndColor("\n4. Look for enemies [lvl." + to_string(CurrentRoom->MinLevel) + "-" + to_string(CurrentRoom->MaxLevel) + "]",
+					"lvl." + to_string(CurrentRoom->MinLevel) + "-" + to_string(CurrentRoom->MaxLevel),
+					CurrentRoom->MinLevel <= 5 ? Utils::ConsoleColor::Yellow : Utils::ConsoleColor::Red);
+			}
+			else if (CurrentRoom->DangerStatus == Navigation::RoomDangerStatus::Safe) {
+				cout << "\n4. Take a nap on the couch";
+			}
+		}
 	}
 }

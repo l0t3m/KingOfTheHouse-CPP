@@ -6,12 +6,6 @@ using namespace std;
 void Exploration::Explore() 
 {
     Utils::PrintRoom();
-	//cout << Game::CurrentRoom->Name;
-
-    cout << "\nWhat would you like to do?";
-    cout << "\n1. Examine the room";
-    cout << "\n2. View stats and inventory";
-    cout << "\n3. Leave the room\n";
 
     try {
         int choice;
@@ -80,14 +74,26 @@ void Exploration::Move()
         }
 
         Room* selectedRoom = roomDict[choice];
-        /*if (selectedRoom->isBossRoom && selectedRoom->boss.isAlive) {
+
+        if (selectedRoom->IsBossRoom) 
+        {
+            cout << "As you get closer to Koda, he grows more intimidating with each step. You shake your head, your tail drooping between your legs.";
+            Utils::PrintAndColor("\nIn that moment, you decide to turn around and avoid facing him.",
+                "turn around and avoid facing him", Utils::ConsoleColor::Red);
+            std::cout << "\nPress enter to continue."; std::cin.get(); std::system("CLS");
+        }
+        else {
+            Game::CurrentRoom = selectedRoom;
+        }
+        /*
+        if (selectedRoom->isBossRoom && selectedRoom->boss.isAlive) {
             if (SceneManager::player->level >= selectedRoom->boss.level) {
                 SceneManager::currentEnemy = &selectedRoom->boss;
                 Combat::StartBossFight();
             }
             else {
                 Functions::TypeLine("As you get closer to Koda, he grows more intimidating with each step. You shake your head, your tail drooping between your legs.");
-                Functions::PrintAndColorType("\nIn that moment, you decide to turn around and avoid facing him.",
+                Utils::PrintAndColorType("\nIn that moment, you decide to turn around and avoid facing him.",
                     "turn around and avoid facing him", ConsoleColor::DarkRed);
                 std::cout << "\nPress enter to continue."; std::cin.get(); std::system("CLS");
             }
@@ -95,7 +101,6 @@ void Exploration::Move()
         else {
             SceneManager::currentRoom = selectedRoom;
         }*/
-        Game::CurrentRoom = selectedRoom;
     }
     catch (...) {
         Move();

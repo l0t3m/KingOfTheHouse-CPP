@@ -11,7 +11,8 @@ namespace Navigation
 		Unknown,
 		Safe,
 		Neutral,
-		Dangerous
+		Dangerous,
+		Boss
 	};
 
 	inline string StatusToString(RoomDangerStatus danger)
@@ -25,6 +26,8 @@ namespace Navigation
 			return "Neutral";
 		case RoomDangerStatus::Dangerous: 
 			return "Dangerous";
+		case RoomDangerStatus::Boss:
+			return "Boss";
 		default:
 			return "Not Set";
 		}
@@ -58,10 +61,10 @@ namespace Navigation
 		Room(string name) : Name(name) { }
 		// Enemy Room
 		Room(string name, int minLevel, int maxLevel) 
-			: Name(name), MinLevel(minLevel), MaxLevel(maxLevel), DangerStatus(RoomDangerStatus::Dangerous) { }
+			: Name(name), MinLevel(minLevel), MaxLevel(maxLevel), DangerStatus(RoomDangerStatus::Dangerous){ }
 		// Boss Room
 		Room(string name, int minLevel)
-			: Name(name), MinLevel(minLevel), DangerStatus(RoomDangerStatus::Dangerous), IsBossRoom(true), DiscoveredStatus(true) {
+			: Name(name), MinLevel(minLevel), DangerStatus(RoomDangerStatus::Boss), IsBossRoom(true), DiscoveredStatus(true) {
 		}
 	};
 }
