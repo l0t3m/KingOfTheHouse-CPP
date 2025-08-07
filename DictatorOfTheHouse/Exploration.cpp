@@ -31,9 +31,9 @@ void Exploration::Explore()
             break;
         case 4:
             if (Game::CurrentRoom->DiscoveredStatus) {
-                if (Game::CurrentRoom->DangerStatus == Dangerous)
+                if (Game::CurrentRoom->DangerStatus == RoomDangerStatus::Dangerous)
                     LookForEnemies();
-                if (Game::CurrentRoom->DangerStatus == Safe)
+                if (Game::CurrentRoom->DangerStatus == RoomDangerStatus::Safe)
                     DoRest();
             }
             break;
@@ -104,10 +104,10 @@ void Exploration::Examine()
 {
     Game::CurrentRoom->DiscoveredStatus = true;
 
-    if (Game::CurrentRoom->DangerStatus == Dangerous)
+    if (Game::CurrentRoom->DangerStatus == RoomDangerStatus::Dangerous)
         //Functions::PrintAndColor("This area feels dangerous...", "dangerous", SceneManager::currentRoom->statusColor);
         cout << "This area feels dangerous..." << endl;
-    else if (Game::CurrentRoom->DangerStatus == Neutral)
+    else if (Game::CurrentRoom->DangerStatus == RoomDangerStatus::Neutral)
         //Functions::PrintAndColor("This area looks neutral but still not safe enough.", "neutral", SceneManager::currentRoom->statusColor);
         cout << "This area looks neutral but still not safe enough." << endl;
     else

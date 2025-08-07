@@ -26,16 +26,47 @@ namespace Utils
 
 	};
 
+	// Sets the text color
+	void SetConsoleColor(ConsoleColor color) {
+		cout << "\033[" << static_cast<int>(color) << "m";
+	}
+
+	// Resets to default color
+	void ResetConsoleColor() {
+		cout << "\033[0m";
+	}
+
+	void PrintAndColor(const string& text, const string& targetText, ConsoleColor color = ConsoleColor::Blue) {
+		if (targetText.empty()) {
+			SetConsoleColor(color);
+			cout << text << endl;
+			ResetConsoleColor();
+			return;
+		}
+
+		size_t index = text.find(targetText);
+		if (index == string::npos) {
+			cout << text << endl;
+			return;
+		}
+
+		cout << text.substr(0, index);
+		SetConsoleColor(color);
+		cout << text.substr(index, targetText.length());
+		ResetConsoleColor();
+		cout << text.substr(index + targetText.length()) << endl;
+	}
+
 	void PrintRoom() 
 	{
 		Room* CurrentRoom = Game::CurrentRoom;
 		// player
 
-		cout << "You're currently in " << CurrentRoom->Name << ". " << toString(CurrentRoom->DangerStatus) << endl;
+		cout << "You're currently in " << CurrentRoom->Name << ". " << StatusToString(CurrentRoom->DangerStatus) << endl;
 		cout << CurrentRoom->Description << endl;
 
 		if (CurrentRoom->ConnectedRooms.size() > 1)
-			cout << "You notice " + std::to_string(CurrentRoom->ConnectedRooms.size()) << " different paths to take.", std::to_string(CurrentRoom->ConnectedRooms.size());
+			cout << "You notice " + to_string(CurrentRoom->ConnectedRooms.size()) << " different paths to take.", to_string(CurrentRoom->ConnectedRooms.size());
 		else
 			cout << "You notice a single path you can take." << endl;
 	}

@@ -30,7 +30,7 @@ namespace Navigation {
         Koda.isBossRoom = true;
         Koda.boss = new Boss("Koda", 125, 18, 15);
         */
-        LivingRoom.DangerStatus = Safe;
+        LivingRoom.DangerStatus = RoomDangerStatus::Safe;
         
 
         // Descriptions
@@ -65,11 +65,13 @@ namespace Navigation {
         Miklat.ItemFindDescription = "You scan the shelves and spot";
     }
 
-    /*
+    
     void SetupItems() {
+        /*
         EntranceArea.AddRoomItem(Item("blue ball", ItemEffect::Distract));
         DiningTable.AddRoomItem(Item("eye drops", ItemEffect::InstantDamage));
         LivingRoom.AddRoomItem(Item("salmon treats", ItemEffect::InstantHeal));
         Miklat.AddRoomItem(Item("dog food", ItemEffect::InstantHeal));
-    }*/
+        */
+    }
 }

@@ -13,7 +13,7 @@ namespace Navigation
 		Dangerous
 	};
 
-	string toString(RoomDangerStatus danger)
+	string StatusToString(RoomDangerStatus danger)
 	{
 		switch (danger) {
 		case RoomDangerStatus::Safe: 
@@ -35,7 +35,7 @@ namespace Navigation
 		string Description;
 		vector<Room*> ConnectedRooms;
 
-		RoomDangerStatus DangerStatus = Neutral;
+		RoomDangerStatus DangerStatus = RoomDangerStatus::Neutral;
 		bool DiscoveredStatus = false;
 
 		// Enemy Related:
@@ -53,6 +53,6 @@ namespace Navigation
 		// Constructors:
 		Room() : Name("Unset Room") { }
 		Room(string name) : Name(name) { }
-		Room(string name, int minLevel, int maxLevel) : Name(name), MinLevel(minLevel), MaxLevel(maxLevel), DangerStatus(Dangerous) { }
+		Room(string name, int minLevel, int maxLevel) : Name(name), MinLevel(minLevel), MaxLevel(maxLevel), DangerStatus(RoomDangerStatus::Dangerous) { }
 	};
 }
