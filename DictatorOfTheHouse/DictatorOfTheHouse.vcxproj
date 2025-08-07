@@ -124,6 +124,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DictatorOfTheHouse.cpp" />
+    <ClCompile Include="Exploration.cpp" />
+    <ClCompile Include="Map.cpp" />
+    <ClCompile Include="SceneManager.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Exploration.h" />
+    <ClInclude Include="Map.h" />
+    <ClInclude Include="Room.h" />
+    <ClInclude Include="SceneManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,10 +1,17 @@
 #include <iostream>
 #include <cctype>
 #include <string>
+#include "Exploration.h"
+#include "Map.h"
 
 using namespace std;
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    Navigation::SetupRooms();
+
+    while (true) 
+    {
+        Exploration::Explore();
+    }
 }

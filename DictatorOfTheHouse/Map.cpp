@@ -1,7 +1,7 @@
 #include "Map.h"
 
 namespace Navigation {
-    static Room EntranceArea("the entrance area");
+    Room EntranceArea("the entrance area");
     Room Koda("Koda's territory");
     Room Toilet("the toilet");
     Room Stairs("front of the stairs");
@@ -26,10 +26,12 @@ namespace Navigation {
         Miklat.ConnectedRooms = { &Hallway, &BackEntranceArea, &Kitchen };
 
         // Room properties
-        /*SceneManager::currentRoom = &EntranceArea;
+        /*
         Koda.isBossRoom = true;
         Koda.boss = new Boss("Koda", 125, 18, 15);
-        LivingRoom.isSafeZone = true;*/
+        */
+        LivingRoom.DangerStatus = Safe;
+        
 
         // Descriptions
         EntranceArea.Description = "This area is tidy, with the exception of a few shoes scattered by the door.";
@@ -63,7 +65,8 @@ namespace Navigation {
         Miklat.ItemFindDescription = "You scan the shelves and spot";
     }
 
-    /*void SetupItems() {
+    /*
+    void SetupItems() {
         EntranceArea.AddRoomItem(Item("blue ball", ItemEffect::Distract));
         DiningTable.AddRoomItem(Item("eye drops", ItemEffect::InstantDamage));
         LivingRoom.AddRoomItem(Item("salmon treats", ItemEffect::InstantHeal));
