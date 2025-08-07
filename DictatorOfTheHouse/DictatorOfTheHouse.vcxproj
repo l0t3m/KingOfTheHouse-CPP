@@ -130,6 +130,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Exploration.h" />
+    <ClInclude Include="Functions.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Room.h" />
     <ClInclude Include="SceneManager.h" />

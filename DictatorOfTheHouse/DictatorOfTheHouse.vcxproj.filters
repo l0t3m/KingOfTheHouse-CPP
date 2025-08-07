@@ -25,6 +25,9 @@
     <Filter Include="Source Files\Game">
       <UniqueIdentifier>{449c4a65-7437-400e-826d-ec2af7bad6a0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Utils">
+      <UniqueIdentifier>{5fc89dc8-8558-423b-8841-bd45baca1a2f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DictatorOfTheHouse.cpp">
@@ -52,6 +55,9 @@
     </ClInclude>
     <ClInclude Include="Exploration.h">
       <Filter>Header Files\Navigation</Filter>
+    </ClInclude>
+    <ClInclude Include="Functions.h">
+      <Filter>Header Files\Utils</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

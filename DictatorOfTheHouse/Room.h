@@ -6,12 +6,26 @@ using namespace std;
 
 namespace Navigation 
 {
-	enum RoomDangerStatus 
+	enum class RoomDangerStatus 
 	{
 		Safe,
 		Neutral,
 		Dangerous
 	};
+
+	string toString(RoomDangerStatus danger)
+	{
+		switch (danger) {
+		case RoomDangerStatus::Safe: 
+			return "Safe";
+		case RoomDangerStatus::Neutral: 
+			return "Neutral";
+		case RoomDangerStatus::Dangerous: 
+			return "Dangerous";
+		default:
+			return "Unknown";
+		}
+	}
 
 	class Room
 	{

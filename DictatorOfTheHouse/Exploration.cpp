@@ -1,11 +1,12 @@
 #include "Exploration.h"
+#include "Functions.h"
 
 using namespace std;
 
 void Exploration::Explore() 
 {
-	// print room
-	cout << Game::CurrentRoom->Name;
+    Utils::PrintRoom();
+	//cout << Game::CurrentRoom->Name;
 
     cout << "\n\nWhat would you like to do?";
     cout << "\n1. Examine the room";
