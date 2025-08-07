@@ -1,16 +1,11 @@
 #pragma once
 #include "Room.h"
+#include "Map.h"
 
 using namespace Navigation;
 
 namespace Game
 {
-	class SceneManager
-	{
-	public:
-		Room CurrentRoom;
-		// player
-		// current enemy
-	};
+	extern Room* CurrentRoom;
 }
 

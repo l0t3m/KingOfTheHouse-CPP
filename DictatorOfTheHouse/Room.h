@@ -1,6 +1,6 @@
 #pragma once
-#include <vector>
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -15,8 +15,8 @@ namespace Navigation
 		vector<Room*> ConnectedRooms;
 
 		// Enemy Related:
-		int MinLevel;
-		int MaxLevel;
+		int MinLevel = 0;
+		int MaxLevel = 0;
 
 		// Item Related:
 		string ItemFindDescription;
