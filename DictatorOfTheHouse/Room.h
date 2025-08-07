@@ -13,7 +13,7 @@ namespace Navigation
 		Dangerous
 	};
 
-	string StatusToString(RoomDangerStatus danger)
+	inline string StatusToString(RoomDangerStatus danger)
 	{
 		switch (danger) {
 		case RoomDangerStatus::Safe: 
