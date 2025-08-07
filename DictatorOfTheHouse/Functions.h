@@ -28,16 +28,18 @@ namespace Utils
 	};
 
 	// Sets the text color
-	void SetConsoleColor(ConsoleColor color) {
+	void SetConsoleColor(ConsoleColor color) 
+	{
 		cout << "\033[" << static_cast<int>(color) << "m";
 	}
 
 	// Resets to default color
-	void ResetConsoleColor() {
+	void ResetConsoleColor() 
+	{
 		cout << "\033[0m";
 	}
 
-	void PrintAndColor(const string& text, const string& targetText, ConsoleColor color = ConsoleColor::Blue) {
+	void PrintAndColor(const string& text, const string& targetText, ConsoleColor color = ConsoleColor::BrightBlue) {
 		if (targetText.empty()) {
 			SetConsoleColor(color);
 			cout << text << endl;
@@ -58,21 +60,82 @@ namespace Utils
 		cout << text.substr(index + targetText.length()) << endl;
 	}
 
+	// Checks if the status has been discovered and returns the required console color according to the danger status.
+	Utils::ConsoleColor GetDangerStatusColor(Room* room) 
+	{
+		if (!room->DiscoveredStatus)
+			return Utils::ConsoleColor::BrightBlack;
+
+		switch (room->DangerStatus) {
+		case RoomDangerStatus::Unknown: 
+			return Utils::ConsoleColor::BrightWhite; 
+			break;
+		case RoomDangerStatus::Safe: 
+			return Utils::ConsoleColor::BrightGreen; 
+			break;
+		case RoomDangerStatus::Neutral: 
+			return Utils::ConsoleColor::BrightCyan; 
+			break;
+		case RoomDangerStatus::Dangerous: 
+			if (room->IsBossRoom)
+				return Utils::ConsoleColor::Red;
+			return Utils::ConsoleColor::Yellow; 
+			break;
+		default:
+			return Utils::ConsoleColor::White; 
+			break;
+		}
+	}
+
+	Utils::ConsoleColor GetDangerStatusColor()
+	{
+		if (!Game::CurrentRoom->DiscoveredStatus)
+			return Utils::ConsoleColor::BrightBlack;
+
+		switch (Game::CurrentRoom->DangerStatus) {
+		case RoomDangerStatus::Unknown:
+			return Utils::ConsoleColor::BrightWhite;
+			break;
+		case RoomDangerStatus::Safe:
+			return Utils::ConsoleColor::BrightGreen;
+			break;
+		case RoomDangerStatus::Neutral:
+			return Utils::ConsoleColor::BrightCyan;
+			break;
+		case RoomDangerStatus::Dangerous:
+			if (Game::CurrentRoom->IsBossRoom)
+				return Utils::ConsoleColor::Red;
+			return Utils::ConsoleColor::Yellow;
+			break;
+		default:
+			return Utils::ConsoleColor::White;
+			break;
+		}
+	}
+
+	// Checks if the current room's danger status has been discovered and returns the correct string.
+	string GetDangerStatusDiscovered(Room* room) {
+		if (room->DiscoveredStatus)
+			return Navigation::StatusToString(room->DangerStatus);
+		else
+			return Navigation::StatusToString(RoomDangerStatus::Unknown);
+	}
+
 	void PrintRoom() 
 	{
 		Room* CurrentRoom = Game::CurrentRoom;
 		// player
 
-		/*PrintAndColor("You're currently in " + CurrentRoom->Name + ". " + Navigation::StatusToString(CurrentRoom->DangerStatus), 
-			Navigation::StatusToString(CurrentRoom->DangerStatus),
-			CurrentRoom->GetDangerStatusColor());*/
+		PrintAndColor("You're currently in " + CurrentRoom->Name + ". [" + GetDangerStatusDiscovered(CurrentRoom) + "]",
+			GetDangerStatusDiscovered(CurrentRoom),
+			GetDangerStatusColor(CurrentRoom));
 
-		cout << "You're currently in " << CurrentRoom->Name << ". " << StatusToString(CurrentRoom->DangerStatus) << endl;
 		cout << CurrentRoom->Description << endl;
 
 		if (CurrentRoom->ConnectedRooms.size() > 1)
-			cout << "You notice " + to_string(CurrentRoom->ConnectedRooms.size()) << " different paths to take.", to_string(CurrentRoom->ConnectedRooms.size());
+			Utils::PrintAndColor("You notice " + to_string(CurrentRoom->ConnectedRooms.size()) + " different paths to take.",
+				to_string(CurrentRoom->ConnectedRooms.size()));
 		else
-			cout << "You notice a single path you can take." << endl;
+			Utils::PrintAndColor("You notice a single path you can take.", "single");
 	}
 }

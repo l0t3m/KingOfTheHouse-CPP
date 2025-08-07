@@ -8,10 +8,10 @@ void Exploration::Explore()
     Utils::PrintRoom();
 	//cout << Game::CurrentRoom->Name;
 
-    cout << "\n\nWhat would you like to do?";
+    cout << "\nWhat would you like to do?";
     cout << "\n1. Examine the room";
     cout << "\n2. View stats and inventory";
-    cout << "\n3. Leave the room";
+    cout << "\n3. Leave the room\n";
 
     try {
         int choice;
@@ -50,19 +50,21 @@ void Exploration::Explore()
 void Exploration::Move() 
 {
     system("CLS");
-    // print room
-    // print leave room
-    cout << "You chose to leave the room, choose a path" << endl;
 
-    cout << "1. Stay\n";
+    Utils::PrintRoom();
+    Utils::PrintAndColor("\n\nYou chose to leave the room, which path will you take?", "leave");
+
+    cout << "\n1. Stay\n";
     map<int, Room*> roomDict;
     int counter = 2;
+
     for (Room* room : Game::CurrentRoom->ConnectedRooms) {
         roomDict[counter] = room;
 
-        cout << counter << ". " << room->Name << endl;
-        /*Functions::PrintAndColor(std::to_string(counter) + ". " + room->Name + " " + room->status,
-            room->status, room->statusColor);*/
+        Utils::PrintAndColor(to_string(counter) + ". " + room->Name + " [" + Utils::GetDangerStatusDiscovered(room) + "]",
+            Utils::GetDangerStatusDiscovered(room),
+            Utils::GetDangerStatusColor(room));
+        
         counter++;
     }
 
@@ -105,14 +107,11 @@ void Exploration::Examine()
     Game::CurrentRoom->DiscoveredStatus = true;
 
     if (Game::CurrentRoom->DangerStatus == RoomDangerStatus::Dangerous)
-        //Functions::PrintAndColor("This area feels dangerous...", "dangerous", SceneManager::currentRoom->statusColor);
-        cout << "This area feels dangerous..." << endl;
+        Utils::PrintAndColor("This area feels dangerous...", "dangerous", Utils::GetDangerStatusColor());
     else if (Game::CurrentRoom->DangerStatus == RoomDangerStatus::Neutral)
-        //Functions::PrintAndColor("This area looks neutral but still not safe enough.", "neutral", SceneManager::currentRoom->statusColor);
-        cout << "This area looks neutral but still not safe enough." << endl;
+        Utils::PrintAndColor("This area looks neutral but still not safe enough.", "neutral", Utils::GetDangerStatusColor());
     else
-        //Functions::PrintAndColor("This area looks safe, enemies can't reach this area.", "safe", SceneManager::currentRoom->statusColor);
-        cout << "This area looks safe, enemies can't reach this area." << endl;
+        Utils::PrintAndColor("This area looks safe, enemies can't reach this area.", "safe", Utils::GetDangerStatusColor());
 
     /*if (!SceneManager::currentRoom->ItemsArr.empty() && SceneManager::currentRoom->ItemsArr[0] != nullptr) {
         std::cout << "\n";

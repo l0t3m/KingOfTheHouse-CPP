@@ -1,7 +1,6 @@
 #pragma once
 #include <string>
 #include <vector>
-#include "Functions.h"
 
 using namespace std;
 
@@ -9,6 +8,7 @@ namespace Navigation
 {
 	enum class RoomDangerStatus 
 	{
+		Unknown,
 		Safe,
 		Neutral,
 		Dangerous
@@ -17,6 +17,8 @@ namespace Navigation
 	inline string StatusToString(RoomDangerStatus danger)
 	{
 		switch (danger) {
+		case RoomDangerStatus::Unknown:
+			return "Unknown";
 		case RoomDangerStatus::Safe: 
 			return "Safe";
 		case RoomDangerStatus::Neutral: 
@@ -24,7 +26,7 @@ namespace Navigation
 		case RoomDangerStatus::Dangerous: 
 			return "Dangerous";
 		default:
-			return "Unknown";
+			return "Not Set";
 		}
 	}
 
@@ -42,7 +44,7 @@ namespace Navigation
 		// Enemy Related:
 		int MinLevel = 0;
 		int MaxLevel = 0;
-		//IsBossRoom
+		bool IsBossRoom = false;
 		//Boss
 
 		// Item Related:
@@ -54,17 +56,12 @@ namespace Navigation
 		// Constructors:
 		Room() : Name("Unset Room") { }
 		Room(string name) : Name(name) { }
-		Room(string name, int minLevel, int maxLevel) : Name(name), MinLevel(minLevel), MaxLevel(maxLevel), DangerStatus(RoomDangerStatus::Dangerous) { }
-	
-		// Methods:
-		Utils::ConsoleColor GetDangerStatusColor() {
-			switch (DangerStatus) {
-			case RoomDangerStatus::Safe: return Utils::ConsoleColor::Green; break;
-			case RoomDangerStatus::Neutral: return Utils::ConsoleColor::Yellow; break;
-			case RoomDangerStatus::Dangerous: return Utils::ConsoleColor::Red; break;
-			default:
-				return Utils::ConsoleColor::White; break;
-			}
+		// Enemy Room
+		Room(string name, int minLevel, int maxLevel) 
+			: Name(name), MinLevel(minLevel), MaxLevel(maxLevel), DangerStatus(RoomDangerStatus::Dangerous) { }
+		// Boss Room
+		Room(string name, int minLevel)
+			: Name(name), MinLevel(minLevel), DangerStatus(RoomDangerStatus::Dangerous), IsBossRoom(true), DiscoveredStatus(true) {
 		}
 	};
 }

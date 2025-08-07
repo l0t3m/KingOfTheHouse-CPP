@@ -2,7 +2,7 @@
 
 namespace Navigation {
     Room EntranceArea("the entrance area");
-    Room Koda("Koda's territory");
+    Room Koda("Koda's territory", 15);
     Room Toilet("the toilet");
     Room Stairs("front of the stairs");
     Room LivingRoom("the living room");
@@ -26,8 +26,8 @@ namespace Navigation {
         Miklat.ConnectedRooms = { &Hallway, &BackEntranceArea, &Kitchen };
 
         // Room properties
+        //Koda.IsBossRoom = true;
         /*
-        Koda.isBossRoom = true;
         Koda.boss = new Boss("Koda", 125, 18, 15);
         */
         LivingRoom.DangerStatus = RoomDangerStatus::Safe;
