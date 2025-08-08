@@ -14,7 +14,7 @@ namespace Entity
 			: Enemy(name, maxHP, baseDamage, level) {}
 
 		// Methods:
-		void RemoveHP(int amount) override
+		bool RemoveHP(int amount) override
 		{
 			this->HP -= amount;
 			if (this->HP <= 0) // player died 
@@ -22,7 +22,9 @@ namespace Entity
 				Utils::PrintAndColor("\nThe boss" + this->Name + " was defeated.", Utils::ConsoleColor::Red);
 				this->IsAlive = false;
 				// scenemanager currentenemy = nullptr;
+				return true;
 			}
+			return false;
 		}
 
 		// AttackPlayer

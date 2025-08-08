@@ -124,7 +124,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DictatorOfTheHouse.cpp" />
+    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Exploration.cpp" />
+    <ClCompile Include="Functions.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="SceneManager.cpp" />
   </ItemGroup>

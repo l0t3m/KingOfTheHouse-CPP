@@ -1,11 +1,10 @@
 #include "Exploration.h"
-#include "Functions.h"
 
 using namespace std;
 
 void Exploration::Explore() 
 {
-    Utils::PrintRoom();
+    Utils::PrintRoom(Game::CurrentRoom);
 
     try {
         int choice;
@@ -45,7 +44,7 @@ void Exploration::Move()
 {
     system("CLS");
 
-    Utils::PrintRoom();
+    Utils::PrintRoom(Game::CurrentRoom);
     Utils::PrintAndColor("\n\nYou chose to leave the room, which path will you take?", "leave");
 
     cout << "\n1. Stay\n";
@@ -112,11 +111,11 @@ void Exploration::Examine()
     Game::CurrentRoom->DiscoveredStatus = true;
 
     if (Game::CurrentRoom->DangerStatus == RoomDangerStatus::Dangerous)
-        Utils::PrintAndColor("This area feels dangerous...", "dangerous", Utils::GetDangerStatusColor());
+        Utils::PrintAndColor("This area feels dangerous...", "dangerous", Utils::GetDangerStatusColor(Game::CurrentRoom));
     else if (Game::CurrentRoom->DangerStatus == RoomDangerStatus::Neutral)
-        Utils::PrintAndColor("This area looks neutral but still not safe enough.", "neutral", Utils::GetDangerStatusColor());
+        Utils::PrintAndColor("This area looks neutral but still not safe enough.", "neutral", Utils::GetDangerStatusColor(Game::CurrentRoom));
     else
-        Utils::PrintAndColor("This area looks safe, enemies can't reach this area.", "safe", Utils::GetDangerStatusColor());
+        Utils::PrintAndColor("This area looks safe, enemies can't reach this area.", "safe", Utils::GetDangerStatusColor(Game::CurrentRoom));
 
     /*if (!SceneManager::currentRoom->ItemsArr.empty() && SceneManager::currentRoom->ItemsArr[0] != nullptr) {
         std::cout << "\n";
