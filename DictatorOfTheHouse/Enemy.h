@@ -1,6 +1,4 @@
 #pragma once
-#include <cstdlib>
-#include <ctime>
 #include "Entity.h"
 
 using namespace std;

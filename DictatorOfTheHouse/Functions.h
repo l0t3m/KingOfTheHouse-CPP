@@ -67,51 +67,51 @@ namespace Utils
 	}
 
 	// Checks if the status has been discovered and returns the required console color according to the danger status.
-	Utils::ConsoleColor GetDangerStatusColor(Navigation::Room* room)
+	ConsoleColor GetDangerStatusColor(Navigation::Room* room)
 	{
 		if (room == nullptr)
-			return Utils::ConsoleColor::White;
+			return ConsoleColor::White;
 
 		if (!room->DiscoveredStatus)
-			return Utils::ConsoleColor::BrightBlack;
+			return ConsoleColor::BrightBlack;
 
 		switch (room->DangerStatus) {
 		case Navigation::RoomDangerStatus::Unknown:
-			return Utils::ConsoleColor::BrightWhite;
+			return ConsoleColor::BrightWhite;
 		case Navigation::RoomDangerStatus::Safe:
-			return Utils::ConsoleColor::BrightGreen;
+			return ConsoleColor::BrightGreen;
 		case Navigation::RoomDangerStatus::Neutral:
-			return Utils::ConsoleColor::BrightCyan;
+			return ConsoleColor::BrightCyan;
 		case Navigation::RoomDangerStatus::Dangerous:
-			return Utils::ConsoleColor::Yellow;
+			return ConsoleColor::Yellow;
 		case Navigation::RoomDangerStatus::Boss:
-			return Utils::ConsoleColor::Red;
+			return ConsoleColor::Red;
 		default:
-			return Utils::ConsoleColor::White;
+			return ConsoleColor::White;
 		}
 	}
 
-	Utils::ConsoleColor GetDangerStatusColor()
+	ConsoleColor GetDangerStatusColor()
 	{
 		if (Game::CurrentRoom == nullptr)
-			return Utils::ConsoleColor::White;
+			return ConsoleColor::White;
 
 		if (!Game::CurrentRoom->DiscoveredStatus)
-			return Utils::ConsoleColor::BrightBlack;
+			return ConsoleColor::BrightBlack;
 
 		switch (Game::CurrentRoom->DangerStatus) {
 		case Navigation::RoomDangerStatus::Unknown:
-			return Utils::ConsoleColor::BrightWhite;
+			return ConsoleColor::BrightWhite;
 		case Navigation::RoomDangerStatus::Safe:
-			return Utils::ConsoleColor::BrightGreen;
+			return ConsoleColor::BrightGreen;
 		case Navigation::RoomDangerStatus::Neutral:
-			return Utils::ConsoleColor::BrightCyan;
+			return ConsoleColor::BrightCyan;
 		case Navigation::RoomDangerStatus::Dangerous:
-			return Utils::ConsoleColor::Yellow;
+			return ConsoleColor::Yellow;
 		case Navigation::RoomDangerStatus::Boss:
-			return Utils::ConsoleColor::Red;
+			return ConsoleColor::Red;
 		default:
-			return Utils::ConsoleColor::White;
+			return ConsoleColor::White;
 		}
 	}
 
