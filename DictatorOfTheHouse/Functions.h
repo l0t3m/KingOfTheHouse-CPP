@@ -39,7 +39,7 @@ namespace Utils
 		cout << "\033[0m";
 	}
 
-	void PrintAndColor(const string& text, const string& targetText, ConsoleColor color = ConsoleColor::BrightBlue) {
+	static void PrintAndColor(const string& text, const string& targetText, ConsoleColor color = ConsoleColor::BrightBlue) {
 		if (targetText.empty()) {
 			SetConsoleColor(color);
 			cout << text << endl;
@@ -60,14 +60,14 @@ namespace Utils
 		cout << text.substr(index + targetText.length()) << endl;
 	}
 
-	void PrintAndColor(const string& text, ConsoleColor color = ConsoleColor::BrightBlue) {
+	static void PrintAndColor(const string& text, ConsoleColor color = ConsoleColor::BrightBlue) {
 		SetConsoleColor(color);
 		cout << text << endl;
 		ResetConsoleColor();
 	}
 
 	// Checks if the status has been discovered and returns the required console color according to the danger status.
-	Utils::ConsoleColor GetDangerStatusColor(Navigation::Room* room)
+	static Utils::ConsoleColor GetDangerStatusColor(Navigation::Room* room)
 	{
 		if (room == nullptr)
 			return Utils::ConsoleColor::White;
@@ -91,7 +91,7 @@ namespace Utils
 		}
 	}
 
-	Utils::ConsoleColor GetDangerStatusColor()
+	/*Utils::ConsoleColor GetDangerStatusColor()
 	{
 		if (Game::CurrentRoom == nullptr)
 			return Utils::ConsoleColor::White;
@@ -113,7 +113,7 @@ namespace Utils
 		default:
 			return Utils::ConsoleColor::White;
 		}
-	}
+	}*/
 
 	// Checks if the current room's danger status has been discovered and returns the correct string.
 	string GetDangerStatusDiscovered(Navigation::Room* room) {
@@ -123,7 +123,7 @@ namespace Utils
 			return Navigation::StatusToString(RoomDangerStatus::Unknown);
 	}
 
-	void PrintRoom() 
+	static void PrintRoom() 
 	{
 		Navigation::Room* CurrentRoom = Game::CurrentRoom;
 		// player

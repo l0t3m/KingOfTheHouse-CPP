@@ -27,29 +27,10 @@ namespace Entity
 		}
 
 		// Methods:
-		virtual void RemoveHP(int amount) 
-		{
-			this->HP -= amount;
-			if (this->HP <= 0)
-				this->IsAlive = false;
-		}
+		virtual void RemoveHP(int amount);
 
-		virtual void AddHP(int amount, bool isFromItem = true) 
-		{
-			this->HP += amount;
-			if (this->HP > this->MaxHP)
-				this->HP = this->MaxHP;
-			if (!isFromItem)
-				Utils::PrintAndColor("\n" + this->Name + " has healed for " + to_string(amount) + " HP by defeating an enemy,");
-		}
+		virtual void AddHP(int amount, bool isFromItem = true);
 
-		virtual void PrintStats() 
-		{
-			cout << "\n-----------------------------";
-			cout << this->Name + " (" + (this->IsAlive ? "Alive" : "Dead") + ")" << endl;
-			cout << this->HP << " / " << this->MaxHP << " HP" << endl;
-			cout << "level " << this->Level << endl;
-			cout << "-----------------------------\n";
-		}
+		virtual void PrintStats();
 	};
 }

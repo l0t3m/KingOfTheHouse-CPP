@@ -31,6 +31,9 @@
     <Filter Include="Header Files\Entity">
       <UniqueIdentifier>{507b4cee-2a62-4787-a5b0-2935302fb7cf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Entity">
+      <UniqueIdentifier>{1e67375e-afa0-4a22-8f4c-3db72b68c934}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DictatorOfTheHouse.cpp">
@@ -44,6 +47,12 @@
     </ClCompile>
     <ClCompile Include="Exploration.cpp">
       <Filter>Source Files\Navigation</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Source Files\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Source Files\Entity</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
