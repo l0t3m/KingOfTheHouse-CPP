@@ -36,7 +36,7 @@ namespace Entity
 			{
 				this->IsAlive = true;
 				this->HP = this->MaxHP;
-				Game::DaysCounter++;
+				//Game::DaysCounter++;
 			}
 	};
 }

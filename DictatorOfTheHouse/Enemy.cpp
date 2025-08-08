@@ -36,14 +36,14 @@ namespace Entity
 		cout << "-----------------------------\n";
 	}
 
-	Enemy GenerateNewEnemy(Navigation::Room* room)
+	Enemy* GenerateNewEnemy(Navigation::Room* room)
 	{
 		srand(static_cast<unsigned>(time(nullptr))); // make it actually random
 		int min = room->MinLevel;
 		int max = room->MaxLevel;
 
 		int level = min + rand() % (max - min + 1);
-		return Enemy("test", 2, 2, 1);
+		return new Enemy(GenerateEnemyName(), GenerateEnemyMaxHP(level), GenerateEnemyBaseDamage(level), level);
 	}
 
 	string GenerateEnemyName()

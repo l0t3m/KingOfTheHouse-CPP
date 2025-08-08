@@ -27,7 +27,7 @@ namespace Entity
 		void PrintStats() override;
 	};
 
-	Enemy GenerateNewEnemy();
+	Enemy* GenerateNewEnemy(Navigation::Room* room);
 
 	string GenerateEnemyName();
 

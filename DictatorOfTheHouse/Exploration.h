@@ -3,6 +3,7 @@
 #include <map>
 #include "SceneManager.h"
 #include "Functions.h"
+#include "Combat.h"
 
 namespace Navigation 
 {

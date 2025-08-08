@@ -133,5 +133,7 @@ namespace Utils
 				cout << "\n4. Take a nap on the couch";
 			}
 		}
+
+		cout << endl;
 	}
 }

@@ -45,7 +45,7 @@ void Exploration::Move()
     system("CLS");
 
     Utils::PrintRoom(Game::CurrentRoom);
-    Utils::PrintAndColor("\n\nYou chose to leave the room, which path will you take?", "leave");
+    Utils::PrintAndColor("\nYou chose to leave the room, which path will you take?", "leave");
 
     cout << "\n1. Stay\n";
     map<int, Room*> roomDict;
@@ -129,20 +129,18 @@ void Exploration::Examine()
 
 void Exploration::LookForEnemies()
 {
-    /*if (rand() % 100 < 95) {
-        if (!Combat::StartFight(Enemy::GenerateNewEnemy())) {
+    if (rand() % 100 < 95) {
+        if (!Combat::StartFight(Game::Player, Entity::GenerateNewEnemy(Game::CurrentRoom))) {
             DoRespawn();
         }
     }
-    else {
-        std::cout << "You didn't find any enemies.";
-        std::cout << "\nPress enter to continue."; std::cin.get(); std::system("CLS");
-    }*/
-
-    cout << "You didn't find any enemies.";
-    cout << "\nPress enter to continue."; 
-    cin.get(); 
-    system("CLS");
+    else
+    {
+        cout << "You didn't find any enemies.";
+        cout << "\nPress enter to continue."; 
+        cin.get(); 
+        system("CLS");
+    }
 }
 
 void Exploration::DoRest()

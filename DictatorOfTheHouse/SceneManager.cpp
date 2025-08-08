@@ -4,4 +4,5 @@ namespace Game {
 	Room* CurrentRoom = &Navigation::EntranceArea;
 	int DaysCounter = 0;
 	Entity::Enemy* CurrentEnemy = nullptr;
+	Entity::Player* Player = new Entity::Player("loteeeeem");
 }
