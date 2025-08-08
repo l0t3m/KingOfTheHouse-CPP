@@ -1,6 +1,5 @@
 #pragma once
 #include <string>
-#include "Exploration.h"
 #include "Map.h"
 
 using namespace std;
@@ -120,12 +119,11 @@ namespace Utils
 		if (room->DiscoveredStatus)
 			return Navigation::StatusToString(room->DangerStatus);
 		else
-			return Navigation::StatusToString(RoomDangerStatus::Unknown);
+			return Navigation::StatusToString(Navigation::RoomDangerStatus::Unknown);
 	}
 
-	static void PrintRoom() 
+	static void PrintRoom(Navigation::Room* CurrentRoom) 
 	{
-		Navigation::Room* CurrentRoom = Game::CurrentRoom;
 		// player
 
 		Utils::PrintAndColor("You're currently in " + CurrentRoom->Name + ". [" + GetDangerStatusDiscovered(CurrentRoom) + "]",

@@ -4,7 +4,7 @@ using namespace std;
 
 void Exploration::Explore() 
 {
-    Utils::PrintRoom();
+    Utils::PrintRoom(Game::CurrentRoom);
 
     try {
         int choice;
@@ -44,7 +44,7 @@ void Exploration::Move()
 {
     system("CLS");
 
-    Utils::PrintRoom();
+    Utils::PrintRoom(Game::CurrentRoom);
     Utils::PrintAndColor("\n\nYou chose to leave the room, which path will you take?", "leave");
 
     cout << "\n1. Stay\n";

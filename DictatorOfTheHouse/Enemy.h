@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 #include <cstdlib>
 #include <ctime>
 #include "Entity.h"
@@ -7,18 +8,17 @@ using namespace std;
 
 namespace Entity
 {
-	class Enemy : public Entity::Entity
+	class Enemy : public Entity
 	{
 	public:
 		// Attributes
 		bool IsDistracted = false;
 
 		// Constructor:
-		Enemy(string name, int maxHP, int baseDamage, int level)
-			: Entity::Entity(name, maxHP, baseDamage, level) { }
+		Enemy(string name, int maxHP, int baseDamage, int level);
 
 		// Methods:
-		void RemoveHP(int amount) override;
+		bool RemoveHP(int amount) override;
 
 		// AttackPlayer
 		

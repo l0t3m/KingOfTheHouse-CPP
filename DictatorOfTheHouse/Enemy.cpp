@@ -5,15 +5,20 @@ using namespace std;
 
 namespace Entity
 {
-	void Enemy::RemoveHP(int amount)
+	Enemy::Enemy(string name, int maxHP, int baseDamage, int level)
+		: Entity::Entity(name, maxHP, baseDamage, level) { }
+
+	bool Enemy::RemoveHP(int amount)
 	{
 		this->HP -= amount;
 		if (this->HP <= 0) // player died 
 		{
-			Utils::PrintAndColor("\n" + this->Name + " has died.", Utils::ConsoleColor::Red);
+			//Utils::PrintAndColor("\n" + this->Name + " has died.", Utils::ConsoleColor::Red);
 			this->IsAlive = false;
 			// scenemanager currentenemy = nullptr;
+			return true;
 		}
+		return false;
 	}
 
 	int Enemy::CalculateXPWorth()
@@ -31,11 +36,11 @@ namespace Entity
 		cout << "-----------------------------\n";
 	}
 
-	Enemy GenerateNewEnemy()
+	Enemy GenerateNewEnemy(Navigation::Room* room)
 	{
 		srand(static_cast<unsigned>(time(nullptr))); // make it actually random
-		int min = Game::CurrentRoom->MinLevel;
-		int max = Game::CurrentRoom->MaxLevel;
+		int min = room->MinLevel;
+		int max = room->MaxLevel;
 
 		int level = min + rand() % (max - min + 1);
 		return Enemy("test", 2, 2, 1);

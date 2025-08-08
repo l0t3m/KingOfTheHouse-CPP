@@ -2,6 +2,7 @@
 #include <iostream>
 #include <map>
 #include "SceneManager.h"
+#include "Functions.h"
 
 namespace Navigation 
 {

@@ -6,7 +6,7 @@ using namespace std;
 
 namespace Entity 
 {
-	class Player : public Entity::Entity
+	class Player : public Entity
 	{
 		public:
 			// Attributes
@@ -20,14 +20,16 @@ namespace Entity
 				: Entity::Entity(name, 10, 4, 1 , true), WeaponSlots(weaponSlots) { }
 
 			// Methods:
-			void RemoveHP(int amount) override
+			bool RemoveHP(int amount) override
 			{
 				this->HP -= amount;
 				if (this->HP <= 0) // player died 
 				{
-					Utils::PrintAndColor("\nYou've been knocked out.", Utils::ConsoleColor::Magenta);
+					//Utils::PrintAndColor("\nYou've been knocked out.", Utils::ConsoleColor::Magenta);
 					this->IsAlive = false;
+					return true;
 				}
+				return false;
 			}
 
 			void DoRest()
