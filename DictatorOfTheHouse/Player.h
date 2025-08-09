@@ -26,6 +26,7 @@ namespace Entity
 
 			void DoRest();
 
+			// Level Related Methods:
 			int CalculateNextLevelXP();
 
 			int CalculateUntilNextLevelXP();
@@ -34,10 +35,22 @@ namespace Entity
 
 			void LevelUp();
 
+			// Weapon Related Methods:
+			bool AddWeapon(Item::Weapon* weapon); // new
+
+			bool SwitchWeapon(Item::Weapon* oldWeapon, Item::Weapon* newWeapon); // new
+
+			void DestroyWeapon(Item::Weapon* targetWeapon); // new
+
+			void SortWeapons(); // new
+
 			int CountOccupiedWeaponSlots();
+
+			bool IsWeaponInventoryFull(); // new
 
 			// Prints Related Methods:
 			void PrintStats() override;
+
 			void PrintWeapons();
 	};
 }

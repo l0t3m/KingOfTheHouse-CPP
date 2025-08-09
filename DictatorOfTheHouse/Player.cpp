@@ -23,6 +23,8 @@ namespace Entity
 		Weapons[0] = Item::GenerateNewWeapon(20);
 	}
 
+	// ---------------------------------------  Methods: --------------------------------------- //
+
 	bool Player::RemoveHP(int amount)
 	{
 		this->HP -= amount;
@@ -41,6 +43,8 @@ namespace Entity
 		this->IsAlive = true;
 		this->HP = this->MaxHP;
 	}
+
+	// ----------------------------------- XP Methods: ----------------------------------- //
 
 	int Player::CalculateNextLevelXP()
 	{
@@ -81,13 +85,86 @@ namespace Entity
 		cin.get();
 	}
 
-	void Player::PrintStats() 
-	{
-		cout << "--> STATS:";
-		cout << "\n| [lvl." + to_string(this->Level) + "] " + this->Name + " | " + to_string(this->HP) + "/" + to_string(this->MaxHP) + "HP";
-		cout << "\n| " + to_string(this->BaseDamage) + " base damage" << endl;
+	// ------------------------------------ Weapon Methods: ------------------------------------ //
 
-		this->PrintWeapons();
+	bool Player::AddWeapon(Item::Weapon* weapon) // new
+	{
+		SortWeapons();
+
+		for (int i = 0; i < WeaponSlots; ++i) {
+			if (Weapons[i] == nullptr)
+			{
+				Weapons[i] = weapon;
+				Utils::PrintAndColor("\nAdded " + weapon->Name + " to your weapon inventory", Utils::ConsoleColor::Green);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	bool Player::SwitchWeapon(Item::Weapon* oldWeapon, Item::Weapon* newWeapon)
+	{
+		SortWeapons();
+
+		for (int i = 0; i < WeaponSlots; ++i) {
+			if (Weapons[i] == oldWeapon)
+			{
+				Weapons[i] = newWeapon;
+				Utils::PrintAndColor("\nSwitched " + oldWeapon->Name + " with " + newWeapon->Name, Utils::ConsoleColor::Green);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	void Player::DestroyWeapon(Item::Weapon* targetWeapon) // new
+	{
+		for (int i = 0; i < WeaponSlots; ++i) {
+			if (Weapons[i] == targetWeapon)
+			{
+				Weapons[i] = nullptr;
+				Utils::PrintAndColor("\nYour " + targetWeapon->Name + " has ran out of uses and broke", Utils::ConsoleColor::Red);
+				break;
+			}
+		}
+		SortWeapons();
+	}
+
+	void Player::SortWeapons() // new
+	{
+		/*Item::Weapon** sortedWeapons = new Item::Weapon * [WeaponSlots];
+
+		for (int i = 0; i < WeaponSlots; i++) {
+			sortedWeapons[i] = nullptr;
+		}
+
+		int index = 0;
+		for (int i = 0; i < WeaponSlots; i++) {
+			if (Weapons[i] != nullptr) {
+				sortedWeapons[index] = Weapons[i];
+				index++;
+			}
+		}
+
+		for (int i = 0; i < WeaponSlots; i++)
+		{
+			Weapons[i] = sortedWeapons[i];
+		}
+
+		delete[] sortedWeapons;*/
+
+		int index = 0;
+
+		for (int i = 0; i < WeaponSlots; i++) {
+			if (Weapons[i] != nullptr) {
+				Weapons[index] = Weapons[i];
+				index++;
+			}
+		}
+
+		for (int i = index; i < WeaponSlots; i++) {
+			Weapons[i] = nullptr;
+		}
 	}
 
 	int Player::CountOccupiedWeaponSlots()
@@ -98,6 +175,24 @@ namespace Entity
 				slotsOccupied++;
 		}
 		return slotsOccupied;
+	}
+
+	bool Player::IsWeaponInventoryFull() // new
+	{
+		return this->CountOccupiedWeaponSlots() == WeaponSlots;
+	}
+
+	
+
+	// -------------------------------- Personal Prints: -------------------------------- //
+
+	void Player::PrintStats()
+	{
+		cout << "--> STATS:";
+		cout << "\n| [lvl." + to_string(this->Level) + "] " + this->Name + " | " + to_string(this->HP) + "/" + to_string(this->MaxHP) + "HP";
+		cout << "\n| " + to_string(this->BaseDamage) + " base damage" << endl;
+
+		this->PrintWeapons();
 	}
 
 	void Player::PrintWeapons()
