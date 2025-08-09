@@ -123,6 +123,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Boss.cpp" />
     <ClCompile Include="Combat.cpp" />
     <ClCompile Include="DictatorOfTheHouse.cpp" />
     <ClCompile Include="Enemy.cpp" />

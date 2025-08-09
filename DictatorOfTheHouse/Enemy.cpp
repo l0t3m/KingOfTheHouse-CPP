@@ -11,11 +11,9 @@ namespace Entity
 	bool Enemy::RemoveHP(int amount)
 	{
 		this->HP -= amount;
-		if (this->HP <= 0) // player died 
+		if (this->HP <= 0)
 		{
-			//Utils::PrintAndColor("\n" + this->Name + " has died.", Utils::ConsoleColor::Red);
 			this->IsAlive = false;
-			// scenemanager currentenemy = nullptr;
 			return true;
 		}
 		return false;

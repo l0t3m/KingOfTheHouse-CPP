@@ -4,7 +4,7 @@
 #include <cstdlib>
 #include <ctime>
 #include "Player.h"
-#include "Enemy.h"
+#include "Boss.h"
 
 using namespace std;
 
@@ -14,5 +14,9 @@ namespace Combat
 
     void PrintFightMenu();
 
+    void PrintBossFightDialog();
+
     bool StartFight(Entity::Player* player, Entity::Enemy* enemy);
+
+    bool StartFight(Entity::Player* player, Entity::Boss* boss);
 }

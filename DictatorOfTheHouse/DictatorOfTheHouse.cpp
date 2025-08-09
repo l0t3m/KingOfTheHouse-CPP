@@ -10,8 +10,14 @@ int main()
 {
     Navigation::SetupRooms();
 
-    while (true) 
+    while (!Game::IsGameOver) 
     {
         Exploration::Explore();
     }
+
+    system("CLS");
+    if (Game::Boss->IsAlive)
+        cout << "Game over! you ddddddddied!";
+    else
+        cout << "You won by killing the boss!";
 }

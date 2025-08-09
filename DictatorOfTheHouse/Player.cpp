@@ -5,6 +5,9 @@ namespace Entity
 	Player::Player(string name, int weaponSlots)
 		: Entity::Entity(name, 10, 4, 1, true), WeaponSlots(weaponSlots) { }
 
+	Player::Player(string name, int weaponSlots, bool isGod)
+		: Entity::Entity(name, 500, 50, 500, true), WeaponSlots(weaponSlots) {}
+
 	bool Player::RemoveHP(int amount)
 	{
 		this->HP -= amount;
@@ -22,7 +25,6 @@ namespace Entity
 	{
 		this->IsAlive = true;
 		this->HP = this->MaxHP;
-		//Game::DaysCounter++;
 	}
 
 	int Player::CalculateNextLevelXP()
@@ -67,7 +69,7 @@ namespace Entity
 	{
 		cout << "--> STATS:";
 		cout << "\n| [lvl." + to_string(this->Level) + "] " + this->Name + " | " + to_string(this->HP) + "/" + to_string(this->MaxHP) + "HP";
-		// days counter (X days has passed)
+		cout << "\n| " + to_string(this->BaseDamage) + " base damage";
 	}
 }
 

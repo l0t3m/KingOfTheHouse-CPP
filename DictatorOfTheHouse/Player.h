@@ -17,6 +17,7 @@ namespace Entity
 
 			// Constructor:
 			Player(string name, int weaponSlots = 3);
+			Player(string name, int weaponSlots = 3, bool isGod = true);
 
 			// Methods:
 			bool RemoveHP(int amount) override;

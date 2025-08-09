@@ -74,32 +74,24 @@ void Exploration::Move()
 
         Room* selectedRoom = roomDict[choice];
 
-        if (selectedRoom->IsBossRoom) 
+        if (selectedRoom->IsBossRoom && Game::Boss->IsAlive) 
         {
-            cout << "As you get closer to Koda, he grows more intimidating with each step. \nYou shake your head, your tail drooping between your legs.";
-            Utils::PrintAndColor("\nIn that moment, you decide to turn around and avoid facing him.",
-                "turn around and avoid facing him", Utils::ConsoleColor::Red);
-            std::cout << "\nPress enter to continue."; std::cin.get(); std::system("CLS");
-        }
-        else {
-            Game::CurrentRoom = selectedRoom;
-        }
-        /*
-        if (selectedRoom->isBossRoom && selectedRoom->boss.isAlive) {
-            if (SceneManager::player->level >= selectedRoom->boss.level) {
-                SceneManager::currentEnemy = &selectedRoom->boss;
-                Combat::StartBossFight();
+            if (Game::Player->Level >= Game::Boss->Level) // player can fight boss
+            {
+                Combat::StartFight(Game::Player, Game::Boss); // returns true if player died - game over
+                Game::IsGameOver = true;
             }
-            else {
-                Functions::TypeLine("As you get closer to Koda, he grows more intimidating with each step. You shake your head, your tail drooping between your legs.");
-                Utils::PrintAndColorType("\nIn that moment, you decide to turn around and avoid facing him.",
-                    "turn around and avoid facing him", ConsoleColor::DarkRed);
+            else // player level is too low
+            {
+                cout << "As you get closer to Koda, he grows more intimidating with each step. \nYou shake your head, your tail drooping between your legs.";
+                Utils::PrintAndColor("\nIn that moment, you decide to turn around and avoid facing him.",
+                    "turn around and avoid facing him", Utils::ConsoleColor::Red);
                 std::cout << "\nPress enter to continue."; std::cin.get(); std::system("CLS");
             }
         }
         else {
-            SceneManager::currentRoom = selectedRoom;
-        }*/
+            Game::CurrentRoom = selectedRoom;
+        }
     }
     catch (...) {
         Move();
@@ -116,11 +108,6 @@ void Exploration::Examine()
         Utils::PrintAndColor("This area looks neutral but still not safe enough.", "neutral", Utils::GetDangerStatusColor(Game::CurrentRoom));
     else
         Utils::PrintAndColor("This area looks safe, enemies can't reach this area.", "safe", Utils::GetDangerStatusColor(Game::CurrentRoom));
-
-    /*if (!SceneManager::currentRoom->ItemsArr.empty() && SceneManager::currentRoom->ItemsArr[0] != nullptr) {
-        std::cout << "\n";
-        Functions::ItemFindingMenu(SceneManager::currentRoom->ItemsArr[0]);
-    }*/
 
     cout << "\nPress enter to continue."; 
     cin.get(); 

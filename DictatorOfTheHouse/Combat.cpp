@@ -41,6 +41,13 @@ namespace Combat
             enemy->Name, Utils::ConsoleColor::BrightRed);
     }
 
+    void PrintBossFightDialog()
+    {
+        cout << "\nKodaaaa";
+        cout << "\nPress enter to start the fight." << endl;
+        cin.get();
+    }
+
 	bool StartFight(Entity::Player* player, Entity::Enemy* enemy)
 	{
         int choice;
@@ -87,6 +94,57 @@ namespace Combat
                     break;
                 default:
                     StartFight(player, enemy);
+                    break;
+                }
+            }
+            catch (...) {
+                system("CLS");
+            }
+        }
+
+        system("CLS");
+        return player->IsAlive;
+	}
+
+    bool StartFight(Entity::Player* player, Entity::Boss* boss)
+	{
+        PrintBossFightDialog(); // comment if you don't want the dialog
+        
+        while (player->IsAlive && boss->IsAlive)
+        {
+            int choice;
+            system("CLS");
+            PrintFightMember(player, boss);
+            PrintFightMenu();
+
+            try {
+            
+                cin >> choice;
+                cin.ignore();
+                system("CLS");
+
+                switch (choice) {
+                case 1:
+                    Attack(player, boss);
+
+                    if (boss->IsAlive)
+                        Attack(boss, player);
+                    else
+                    {
+                        Utils::PrintAndColor(boss->Name + " had died.", Utils::ConsoleColor::BrightRed);
+                        cin.get();
+                        system("CLS");
+                    }
+                    break;
+                case 2:
+                    // attack using weapon
+                    break;
+                case 3:
+                    cout << "Now that you stand in front of Koda, there is no escape...";
+                    cin.get();
+                    break;
+                default:
+                    StartFight(player, boss);
                     break;
                 }
             }
