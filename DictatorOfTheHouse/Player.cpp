@@ -42,6 +42,7 @@ namespace Entity
 	{
 		this->IsAlive = true;
 		this->HP = this->MaxHP;
+		SavePlayer(this);
 	}
 
 	// ----------------------------------- XP Methods: ----------------------------------- //
@@ -212,12 +213,12 @@ namespace Entity
 			json loaded;
 			playerFile >> loaded;
 			Player* player = new Player(loaded.at("name"));
-			loaded.at("slots").get_to(player->WeaponSlots);
-			loaded.at("xp").get_to(player->XP);
-			loaded.at("hp").get_to(player->HP);
-			loaded.at("maxHP").get_to(player->MaxHP);
-			loaded.at("dmg").get_to(player->BaseDamage);
-			loaded.at("level").get_to(player->Level);
+			player->WeaponSlots = loaded.at("slots");
+			player->XP = loaded.at("xp");
+			player->HP = loaded.at("hp");
+			player->MaxHP = loaded.at("maxHP");
+			player->BaseDamage = loaded.at("dmg");
+			player->Level = loaded.at("level");
 			playerFile.close();
 			return player;
 		}
