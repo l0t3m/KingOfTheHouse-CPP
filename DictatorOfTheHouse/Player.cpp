@@ -96,7 +96,7 @@ namespace Entity
 			if (Weapons[i] == nullptr)
 			{
 				Weapons[i] = weapon;
-				Utils::PrintAndColor("\n\nAdded " + weapon->Name + " to your weapon inventory", Utils::ConsoleColor::Green);
+				Utils::PrintAndColor("\nAdded " + weapon->Name + " to your weapon inventory", Utils::ConsoleColor::Green);
 				return true;
 			}
 		}

@@ -98,6 +98,13 @@ void Exploration::Move()
 
 void Exploration::Examine()
 {
+    // If room hasn't been discovered and is dangerous, the player finds a weapon using the room's minimum level
+    if (!Game::CurrentRoom->DiscoveredStatus && Game::CurrentRoom->DangerStatus == Navigation::RoomDangerStatus::Dangerous)
+    {
+        Game::Player->AddWeapon(Item::GenerateNewWeapon(Game::CurrentRoom->MinLevel));
+    }
+
+    Game::CurrentRoom->DiscoveredStatus = true;
 
     if (Game::CurrentRoom->DangerStatus == RoomDangerStatus::Dangerous)
         Utils::PrintAndColor("This area feels dangerous...", "dangerous", Utils::GetDangerStatusColor(Game::CurrentRoom));
@@ -105,13 +112,6 @@ void Exploration::Examine()
         Utils::PrintAndColor("This area looks neutral but still not safe enough.", "neutral", Utils::GetDangerStatusColor(Game::CurrentRoom));
     else
         Utils::PrintAndColor("This area looks safe, enemies can't reach this area.", "safe", Utils::GetDangerStatusColor(Game::CurrentRoom));
-
-    if (!Game::CurrentRoom->DiscoveredStatus)
-    {
-        Game::Player->AddWeapon(Item::GenerateNewWeapon(1));
-    }
-
-    Game::CurrentRoom->DiscoveredStatus = true;
 
     cout << "\nPress enter to continue."; 
     cin.get(); 

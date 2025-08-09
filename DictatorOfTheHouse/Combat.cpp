@@ -117,13 +117,10 @@ namespace Combat
                     cout << "weapon switch menu";
                     // weapon switch menu
                 else
-                {
-                    cout << "You chose to take it";
                     player->AddWeapon(weapon);
-                }
                 break;
             case 2:
-                cout << "You chose to leave it\n";
+                cout << "You chose to leave it the weapon behind\n";
                 break;
             default:
                 StartWeaponFindingMenu(player, weapon);
