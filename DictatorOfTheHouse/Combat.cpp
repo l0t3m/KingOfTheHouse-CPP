@@ -72,6 +72,10 @@ namespace Combat
                     {
                         Utils::PrintAndColor(enemy->Name + " had died.", Utils::ConsoleColor::BrightRed);
                         cin.get();
+                        system("CLS");
+                        player->AddHP((int)(enemy->MaxHP / 4));
+                        player->GainXP(enemy->CalculateXPWorth());
+                        cin.get();
                     }
                     break;
                 case 2:

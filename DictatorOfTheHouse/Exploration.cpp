@@ -76,7 +76,7 @@ void Exploration::Move()
 
         if (selectedRoom->IsBossRoom) 
         {
-            cout << "As you get closer to Koda, he grows more intimidating with each step. You shake your head, your tail drooping between your legs.";
+            cout << "As you get closer to Koda, he grows more intimidating with each step. \nYou shake your head, your tail drooping between your legs.";
             Utils::PrintAndColor("\nIn that moment, you decide to turn around and avoid facing him.",
                 "turn around and avoid facing him", Utils::ConsoleColor::Red);
             std::cout << "\nPress enter to continue."; std::cin.get(); std::system("CLS");
@@ -145,17 +145,17 @@ void Exploration::LookForEnemies()
 
 void Exploration::DoRest()
 {
-    //SceneManager::player->DoRest();
-    cout << "A day has passed...";
-    cout << "\nHP has been restored to max";
-    cout << "\nPress enter to wake up.";
+    Game::Player->DoRest();
+    Utils::PrintAndColor("A day has passed...", Utils::ConsoleColor::Yellow);
+    Utils::PrintAndColor("\nHP has been restored to max", Utils::ConsoleColor::Green);
+    cout << "\nPress enter to wake up...";
     cin.get(); 
     system("CLS");
 }
 
 void Exploration::Stats()
 {
-    //SceneManager::player->PrintStats();
+    Game::Player->PrintStats();
     cout << "\nPress enter to continue."; 
     cin.get(); 
     system("CLS");
@@ -163,10 +163,6 @@ void Exploration::Stats()
 
 void Exploration::DoRespawn()
 {
-    std::cout << "\nPress enter to continue."; 
-    std::cin.get(); 
-    std::system("CLS");
-
-    //SceneManager::player->DoRest();
+    Game::Player->DoRest();
     Game::CurrentRoom = &Navigation::LivingRoom;
 }

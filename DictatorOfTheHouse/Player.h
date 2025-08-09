@@ -22,6 +22,17 @@ namespace Entity
 			bool RemoveHP(int amount) override;
 
 			void DoRest();
+
+			int CalculateNextLevelXP();
+
+			int CalculateUntilNextLevelXP();
+
+			void GainXP(int xpAmount);
+
+			void LevelUp();
+
+			// Prints Related Methods:
+			void PrintStats() override;
 	};
 }
 

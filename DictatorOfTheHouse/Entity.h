@@ -28,7 +28,7 @@ namespace Entity
 		// Methods:
 		virtual bool RemoveHP(int amount);
 
-		virtual void AddHP(int amount, bool isFromItem);
+		virtual void AddHP(int amount, bool isFromItem = true);
 
 		virtual void PrintStats();
 	};

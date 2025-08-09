@@ -16,7 +16,7 @@ namespace Entity
 		return false;
 	}
 
-	void Entity::AddHP(int amount, bool isFromItem = true) { }
+	void Entity::AddHP(int amount, bool isFromItem) { }
 
 	void Entity::PrintStats() { }
 }
