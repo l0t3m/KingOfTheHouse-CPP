@@ -95,7 +95,7 @@ namespace Entity
 			if (Weapons[i] == nullptr)
 			{
 				Weapons[i] = weapon;
-				Utils::PrintAndColor("\nAdded " + weapon->Name + " to your weapon inventory", Utils::ConsoleColor::Green);
+				Utils::PrintAndColor("\n\nAdded " + weapon->Name + " to your weapon inventory", Utils::ConsoleColor::Green);
 				return true;
 			}
 		}
@@ -123,7 +123,7 @@ namespace Entity
 			if (Weapons[i] == targetWeapon)
 			{
 				Weapons[i] = nullptr;
-				Utils::PrintAndColor("\nYour " + targetWeapon->Name + " has ran out of uses and broke", Utils::ConsoleColor::Red);
+				Utils::PrintAndColor("\nYour " + targetWeapon->Name + " has ran out of uses and broke\n", Utils::ConsoleColor::Red);
 				break;
 			}
 		}

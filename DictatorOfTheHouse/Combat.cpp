@@ -11,18 +11,24 @@ namespace Combat
         return defender->RemoveHP(attacker->BaseDamage);
     }
 
-    bool Attack(Entity::Entity* attacker, Entity::Entity* defender, Item::Weapon* weapon)
+    bool Attack(Entity::Player* player, Entity::Enemy* enemy, Item::Weapon* weapon)
     {
-        Utils::PrintAndColor(attacker->Name + " has dealt " + to_string(weapon->Damage) + " damage to " + defender->Name,
+        Utils::PrintAndColor(player->Name + " has dealt " + to_string(weapon->Damage) + " damage to " + enemy->Name,
             to_string(weapon->Damage) + " damage", Utils::ConsoleColor::BrightRed);
+        
         cin.get();
 
-        return defender->RemoveHP(weapon->Damage);
+        if (weapon->RemoveDurability())
+        {
+            player->DestroyWeapon(weapon);
+        }
+        
+        return enemy->RemoveHP(weapon->Damage);
     }
 
     void Flee(Entity::Entity* attacker, Entity::Entity* defender)
     {
-        if (rand() % 100 < 80) 
+        if (rand() % 100 < 20) 
         {
             cout << "As you attempt to flee, the enemy delivers a final blow...\n";
             Attack(attacker, defender);
@@ -47,11 +53,21 @@ namespace Combat
         cout << "3. Flee\n" << endl;
     }
 
+    void PrintWeaponFindingMenu(Entity::Player* player)
+    {
+        cout << "\n\nWhat would you like to do?";
+        if (!player->IsWeaponInventoryFull())
+            cout << "\n1. Take it";
+        else
+            cout << "\n1. Replace it with one of your weapons [Inventory is full]";
+        cout << "\n2. Leave it\n";
+    }
+
     void PrintWeaponSelectionMenu(Entity::Player* player)
     {
-        // sort weapons
+        player->SortWeapons();
 
-        cout << "\nEnter the number of the weapon you want to use";
+        cout << "\nEnter the number of the weapon you want to use\n";
 
         cout << "\n--> WEAPONS: [" << player->CountOccupiedWeaponSlots() << "/" << player->WeaponSlots << "]";
         for (int i = 0; i < player->WeaponSlots; i++)
@@ -77,6 +93,49 @@ namespace Combat
     {
         cout << "\nKodaaaa";
         cout << "\nPress enter to start the fight." << endl;
+        cin.get();
+    }
+
+    void StartWeaponFindingMenu(Entity::Player* player, Item::Weapon* weapon)
+    {
+        Utils::PrintAndColor("You let out a relieved purr after defeating the enemy, then suddenly spot a " + weapon->Name + ".", 
+            weapon->Name, Utils::ConsoleColor::Yellow);
+        weapon->PrintWeapon();
+        PrintWeaponFindingMenu(player);
+
+        int choice;
+        try
+        {
+            cin >> choice;
+            cin.ignore();
+            system("CLS");
+
+            switch (choice)
+            {
+            case 1:
+                if (player->IsWeaponInventoryFull())
+                    cout << "weapon switch menu";
+                    // weapon switch menu
+                else
+                {
+                    cout << "You chose to take it";
+                    player->AddWeapon(weapon);
+                }
+                break;
+            case 2:
+                cout << "You chose to leave it\n";
+                break;
+            default:
+                StartWeaponFindingMenu(player, weapon);
+                break;
+            }
+        }
+        catch (...)
+        {
+            system("CLS");
+        }
+
+        cout << "\nPress enter to continue" << endl;
         cin.get();
     }
 
@@ -110,7 +169,6 @@ namespace Combat
 
         if (enemy->IsAlive)
         {
-            system("CLS");
             Attack(enemy, player);
         }
         else
@@ -162,6 +220,14 @@ namespace Combat
             catch (...) {
                 system("CLS");
             }
+        }
+
+        if (!player->IsAlive)
+            return false;
+        if ((rand() % 100) < 80 && !fled)
+        {
+            system("CLS");
+            StartWeaponFindingMenu(player, Item::GenerateNewWeapon(enemy->Level));
         }
 
         system("CLS");

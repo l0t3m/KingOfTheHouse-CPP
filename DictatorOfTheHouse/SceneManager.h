@@ -9,7 +9,6 @@ namespace Game
 {
 	extern Room* CurrentRoom;
 	extern int DaysCounter;
-	//extern Entity::Enemy* CurrentEnemy;
 	extern Entity::Player* Player;
 	extern Entity::Boss* Boss;
 	extern bool IsGameOver;

@@ -27,7 +27,7 @@ namespace Entity
 		cout << this->Name + " (" + (this->IsAlive ? "Alive" : "Dead") + ")" << endl;
 		cout << this->HP << " / " << this->MaxHP << " HP" << endl;
 		cout << "level " << this->Level << endl;
-		cout << this->BaseDamage << " base damage" << endl;
+		cout << " " << this->BaseDamage << " base damage" << endl;
 		cout << "-----------------------------\n";
 	}
 }

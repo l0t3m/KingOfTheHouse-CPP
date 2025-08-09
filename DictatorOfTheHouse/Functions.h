@@ -33,6 +33,7 @@ namespace Utils
 	void ResetConsoleColor();
 
 	void PrintAndColor(const string& text, const string& targetText, ConsoleColor color = ConsoleColor::BrightBlue);
+
 	void PrintAndColor(const string& text, ConsoleColor color = ConsoleColor::BrightBlue);
 
 	// Checks if the status has been discovered and returns the required console color according to the danger status.

@@ -12,7 +12,6 @@ namespace Navigation
     public:
         static void Explore();
         static void DoRespawn();
-
     private:
         static void Move();
         static void Examine();

@@ -17,7 +17,7 @@ namespace Item
 	void Weapon::PrintWeapon()
 	{
 		cout << "\n| " << this->Name << ":";
-		cout << "\n|      " << this->Damage + " damage | " << this->Durability << " uses left";
+		cout << "\n|  "<< to_string(this->Damage) + " damage | " << to_string(this->Durability) << " uses left";
 	}
 
 	Weapon* GenerateNewWeapon(int level)

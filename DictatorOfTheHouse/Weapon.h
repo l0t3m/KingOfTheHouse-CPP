@@ -14,6 +14,7 @@ namespace Item
 		int Damage;
 
 		Weapon();
+
 		Weapon(string name, int durability, int damage);
 
 		bool RemoveDurability();
