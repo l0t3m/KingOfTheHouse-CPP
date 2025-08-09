@@ -224,7 +224,7 @@ namespace Entity
 		else
 		{
 			playerFile.close();
-			Player* player = new Player("LOTEM");
+			Player* player = new Player("player");
 			SavePlayer(player);
 
 			return player;
