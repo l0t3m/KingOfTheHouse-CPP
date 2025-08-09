@@ -204,6 +204,47 @@ namespace Entity
 				Weapons[i]->PrintWeapon();
 		}
 	}
+	Player* CreatePlayer()
+	{
+		ifstream playerFile("player.json");
+		if (playerFile.good())
+		{
+			json loaded;
+			playerFile >> loaded;
+			Player* player = new Player(loaded.at("name"));
+			loaded.at("slots").get_to(player->WeaponSlots);
+			loaded.at("xp").get_to(player->XP);
+			loaded.at("hp").get_to(player->HP);
+			loaded.at("maxHP").get_to(player->MaxHP);
+			loaded.at("dmg").get_to(player->BaseDamage);
+			loaded.at("level").get_to(player->Level);
+			playerFile.close();
+			return player;
+		}
+		else
+		{
+			playerFile.close();
+			Player* player = new Player("LOTEM");
+			SavePlayer(player);
 
+			return player;
+		}
+		return nullptr;
+	}
+
+	void SavePlayer(Player* player)
+	{
+		ofstream playerFile("player.json");
+		json load;
+		load = json{ {"name", player->Name},
+				{"slots", player->WeaponSlots},
+				{"xp", player->XP},
+				{"hp", player->HP},
+				{"maxHP", player->MaxHP},
+				{"dmg", player->BaseDamage},
+				{"level", player->Level } };
+		playerFile << load.dump();
+		playerFile.close();
+	}
 }
 

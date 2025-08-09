@@ -2,9 +2,11 @@
 #include "Functions.h"
 #include "Entity.h"
 #include "Weapon.h"
+#include <fstream>
+#include <nlohmann/json.hpp>
 
 using namespace std;
-
+using json = nlohmann::json;
 namespace Entity 
 {
 	class Player : public Entity
@@ -53,5 +55,9 @@ namespace Entity
 
 			void PrintWeapons();
 	};
+
+	Player* CreatePlayer();
+
+	void SavePlayer(Player* player);
 }
 
