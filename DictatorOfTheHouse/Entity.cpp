@@ -1,7 +1,4 @@
-#pragma once
 #include "Entity.h"
-
-using namespace std;
 
 namespace Entity
 {
@@ -16,7 +13,13 @@ namespace Entity
 		return false;
 	}
 
-	void Entity::AddHP(int amount, bool isFromItem) { }
+	void Entity::AddHP(int amount)
+	{
+		this->HP += amount;
+		if (this->HP > this->MaxHP)
+			this->HP = this->MaxHP;
+		Utils::PrintAndColor(this->Name + " has healed for " + to_string(amount) + " HP by defeating an enemy\n", Utils::ConsoleColor::Green);
+	}
 
 	void Entity::PrintStats() { }
 }

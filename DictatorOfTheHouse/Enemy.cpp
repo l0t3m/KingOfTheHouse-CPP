@@ -1,7 +1,4 @@
-#pragma once
 #include "Enemy.h"
-
-using namespace std;
 
 namespace Entity
 {
@@ -46,11 +43,15 @@ namespace Entity
 
 	string GenerateEnemyName()
 	{
-		vector<string> enemyNames = { "Cricket", "Cockroach", "Ant", "Fly", "Mosquito" };
-		vector<string> enemyColors = { "Dark", "Brown", "Black" };
+		const string enemyNames[] = { "Cricket", "Cockroach", "Ant", "Fly", "Mosquito" };
+		const string enemyColors[] = { "Dark", "Brown", "Black" };
 
-		string name = enemyNames[rand() % enemyNames.size()];
-		string color = enemyColors[rand() % enemyColors.size()];
+		int namesCount = sizeof(enemyNames) / sizeof(enemyNames[0]);
+		int colorsCount = sizeof(enemyColors) / sizeof(enemyColors[0]);
+
+		string name = enemyNames[rand() % namesCount];
+		string color = enemyColors[rand() % colorsCount];
+
 		return (color + " " + name);
 	}
 

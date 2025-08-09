@@ -1,7 +1,5 @@
 #include "Exploration.h"
 
-using namespace std;
-
 void Exploration::Explore() 
 {
     Utils::PrintRoom(Game::CurrentRoom);

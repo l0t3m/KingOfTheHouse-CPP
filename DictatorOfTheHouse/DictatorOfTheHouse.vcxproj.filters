@@ -34,6 +34,12 @@
     <Filter Include="Source Files\Entity">
       <UniqueIdentifier>{1e67375e-afa0-4a22-8f4c-3db72b68c934}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Item">
+      <UniqueIdentifier>{8bbdc27c-2e4b-4019-9994-a4e4f0e8f3b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Item">
+      <UniqueIdentifier>{58fc6e80-ec69-43c1-91de-3a5c4f915c97}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DictatorOfTheHouse.cpp">
@@ -66,6 +72,9 @@
     <ClCompile Include="Combat.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
+    <ClCompile Include="Weapon.cpp">
+      <Filter>Source Files\Item</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Map.h">
@@ -97,6 +106,9 @@
     </ClInclude>
     <ClInclude Include="Combat.h">
       <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Weapon.h">
+      <Filter>Header Files\Item</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

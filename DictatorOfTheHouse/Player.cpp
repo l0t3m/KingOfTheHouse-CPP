@@ -3,10 +3,25 @@
 namespace Entity
 {
 	Player::Player(string name, int weaponSlots)
-		: Entity::Entity(name, 10, 4, 1, true), WeaponSlots(weaponSlots) { }
+		: Entity::Entity(name, 10, 4, 1, true), WeaponSlots(weaponSlots) 
+	{
+		Weapons = new Item::Weapon * [weaponSlots]; // allocate array of Weapon pointers
 
-	Player::Player(string name, int weaponSlots, bool isGod)
-		: Entity::Entity(name, 500, 50, 500, true), WeaponSlots(weaponSlots) {}
+		for (int i = 0; i < weaponSlots; ++i) {
+			Weapons[i] = nullptr; // set them to null initially
+		}
+	}
+
+	Player::Player(string name, bool isGod, int weaponSlots)
+		: Entity::Entity(name, 500, 50, 500, true), WeaponSlots(weaponSlots) 
+	{
+		Weapons = new Item::Weapon * [weaponSlots]; // allocate array of Weapon pointers
+
+		for (int i = 0; i < weaponSlots; ++i) {
+			Weapons[i] = nullptr; // set them to null initially
+		}
+		Weapons[0] = Item::GenerateNewWeapon(20);
+	}
 
 	bool Player::RemoveHP(int amount)
 	{
@@ -60,16 +75,40 @@ namespace Entity
 
 		Utils::PrintAndColor("Level up, You're now level " + to_string(this->Level) + "!",
 			to_string(this->Level), Utils::ConsoleColor::Yellow);
-		Utils::PrintAndColor("\nStats improved");
-		Utils::PrintAndColor("\nYou've been healed", Utils::ConsoleColor::BrightGreen);
+		Utils::PrintAndColor("+ Stats improved");
+		Utils::PrintAndColor("+ You've been fully healed", Utils::ConsoleColor::BrightGreen);
 		cout << "\nPress enter to continue\n"; 
+		cin.get();
 	}
 
 	void Player::PrintStats() 
 	{
 		cout << "--> STATS:";
 		cout << "\n| [lvl." + to_string(this->Level) + "] " + this->Name + " | " + to_string(this->HP) + "/" + to_string(this->MaxHP) + "HP";
-		cout << "\n| " + to_string(this->BaseDamage) + " base damage";
+		cout << "\n| " + to_string(this->BaseDamage) + " base damage" << endl;
+
+		this->PrintWeapons();
 	}
+
+	int Player::CountOccupiedWeaponSlots()
+	{
+		int slotsOccupied = 0;
+		for (int i = 0; i < WeaponSlots; ++i) {
+			if (Weapons[i] != nullptr)
+				slotsOccupied++;
+		}
+		return slotsOccupied;
+	}
+
+	void Player::PrintWeapons()
+	{
+		cout << "\n--> WEAPONS: [" << this->CountOccupiedWeaponSlots() << "/" << WeaponSlots << "]";
+
+		for (int i = 0; i < WeaponSlots; ++i) {
+			if (Weapons[i] != nullptr)
+				Weapons[i]->PrintWeapon();
+		}
+	}
+
 }
 

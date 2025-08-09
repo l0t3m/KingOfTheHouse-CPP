@@ -1,6 +1,7 @@
 #pragma once
 #include "Functions.h"
 #include "Entity.h"
+#include "Weapon.h"
 
 using namespace std;
 
@@ -14,10 +15,11 @@ namespace Entity
 			// itemInventorySlots = 3
 			// ItemInventory
 			int WeaponSlots = 3;
+			Item::Weapon** Weapons;
 
 			// Constructor:
 			Player(string name, int weaponSlots = 3);
-			Player(string name, int weaponSlots = 3, bool isGod = true);
+			Player(string name, bool IsGod, int weaponSlots = 3);
 
 			// Methods:
 			bool RemoveHP(int amount) override;
@@ -32,8 +34,11 @@ namespace Entity
 
 			void LevelUp();
 
+			int CountOccupiedWeaponSlots();
+
 			// Prints Related Methods:
 			void PrintStats() override;
+			void PrintWeapons();
 	};
 }
 

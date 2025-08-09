@@ -1,7 +1,5 @@
 #include "Combat.h"
 
-using namespace std;
-
 namespace Combat 
 {
     bool Attack(Entity::Entity* attacker, Entity::Entity* defender)
@@ -13,6 +11,15 @@ namespace Combat
         return defender->RemoveHP(attacker->BaseDamage);
     }
 
+    bool Attack(Entity::Entity* attacker, Entity::Entity* defender, Item::Weapon* weapon)
+    {
+        Utils::PrintAndColor(attacker->Name + " has dealt " + to_string(weapon->Damage) + " damage to " + defender->Name,
+            to_string(weapon->Damage) + " damage", Utils::ConsoleColor::BrightRed);
+        cin.get();
+
+        return defender->RemoveHP(weapon->Damage);
+    }
+
     void Flee(Entity::Entity* attacker, Entity::Entity* defender)
     {
         if (rand() % 100 < 80) 
@@ -22,6 +29,15 @@ namespace Combat
             cin.get();
         }
     }
+    
+    void EndFight(Entity::Player* player, Entity::Enemy* enemy)
+    {
+        Utils::PrintAndColor(enemy->Name + " had died.", Utils::ConsoleColor::BrightRed);
+        cin.get();
+        system("CLS");
+        player->AddHP((int)(enemy->MaxHP / 4));
+        player->GainXP(enemy->CalculateXPWorth());
+    }
 
     void PrintFightMenu()
     {
@@ -29,6 +45,22 @@ namespace Combat
         cout << "1. Attack [Normal Attack]" << endl;
         cout << "2. Attack using a weapon" << endl;
         cout << "3. Flee\n" << endl;
+    }
+
+    void PrintWeaponSelectionMenu(Entity::Player* player)
+    {
+        // sort weapons
+
+        cout << "\nEnter the number of the weapon you want to use";
+
+        cout << "\n--> WEAPONS: [" << player->CountOccupiedWeaponSlots() << "/" << player->WeaponSlots << "]";
+        for (int i = 0; i < player->WeaponSlots; i++)
+        {
+            if (player->Weapons[i] != nullptr)
+            {
+                cout << "\n| " << i+1 << ". " << player->Weapons[i]->Name << ": " << player->Weapons[i]->Damage << " damage | " << player->Weapons[i]->Durability << " uses left";
+            }
+        }
     }
 
     void PrintFightMember(Entity::Player* player, Entity::Enemy* enemy)
@@ -46,6 +78,43 @@ namespace Combat
         cout << "\nKodaaaa";
         cout << "\nPress enter to start the fight." << endl;
         cin.get();
+    }
+
+    void StartWeaponSelection(Entity::Player* player, Entity::Enemy* enemy)
+    {
+        system("CLS");
+        PrintFightMember(player, enemy);
+        PrintWeaponSelectionMenu(player);
+        
+        int choice;
+        try
+        {
+            int backChoice = player->CountOccupiedWeaponSlots() + 1;
+            cout << "\n| " << backChoice << ". Go back\n";
+
+            cin >> choice;
+            cin.ignore();
+            system("CLS");
+            if (choice == backChoice)
+            {
+                return;
+            }
+            
+            Attack(player, enemy, player->Weapons[choice - 1]);
+        }
+        catch (...)
+        {
+            system("CLS");
+            StartWeaponSelection(player, enemy);
+        }
+
+        if (enemy->IsAlive)
+        {
+            system("CLS");
+            Attack(enemy, player);
+        }
+        else
+            EndFight(player, enemy);
     }
 
 	bool StartFight(Entity::Player* player, Entity::Enemy* enemy)
@@ -76,17 +145,10 @@ namespace Combat
                     if (enemy->IsAlive)
                         Attack(enemy, player);
                     else
-                    {
-                        Utils::PrintAndColor(enemy->Name + " had died.", Utils::ConsoleColor::BrightRed);
-                        cin.get();
-                        system("CLS");
-                        player->AddHP((int)(enemy->MaxHP / 4));
-                        player->GainXP(enemy->CalculateXPWorth());
-                        cin.get();
-                    }
+                        EndFight(player, enemy);
                     break;
                 case 2:
-                    // attack using weapon
+                    StartWeaponSelection(player, enemy);
                     break;
                 case 3:
                     fled = true;
@@ -137,7 +199,7 @@ namespace Combat
                     }
                     break;
                 case 2:
-                    // attack using weapon
+                    StartWeaponSelection(player, boss);
                     break;
                 case 3:
                     cout << "Now that you stand in front of Koda, there is no escape...";

@@ -1,7 +1,5 @@
 #include "Boss.h"
 
-using namespace std;
-
 namespace Entity
 {
 	Boss::Boss(string name, int maxHP, int baseDamage, int level)

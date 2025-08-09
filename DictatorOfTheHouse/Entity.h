@@ -1,7 +1,7 @@
 #pragma once
 #include <cstdlib>
 #include <ctime>
-#include "Room.h" 
+#include "Functions.h"
 
 using namespace std;
 
@@ -28,7 +28,7 @@ namespace Entity
 		// Methods:
 		virtual bool RemoveHP(int amount);
 
-		virtual void AddHP(int amount, bool isFromItem = true);
+		virtual void AddHP(int amount);
 
 		virtual void PrintStats();
 	};

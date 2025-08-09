@@ -1,6 +1,7 @@
 #include "Map.h"
 
-namespace Navigation {
+namespace Navigation 
+{
     Room EntranceArea("the entrance area");
     Room Koda("Koda's territory", 15);
     Room Toilet("the toilet");
