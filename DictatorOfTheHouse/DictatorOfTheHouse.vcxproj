@@ -130,6 +130,7 @@
     <ClCompile Include="Exploration.cpp" />
     <ClCompile Include="Functions.cpp" />
     <ClCompile Include="Map.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="SceneManager.cpp" />
   </ItemGroup>
   <ItemGroup>

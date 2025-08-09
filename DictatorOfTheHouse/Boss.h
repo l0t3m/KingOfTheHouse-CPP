@@ -1,6 +1,6 @@
 #pragma once
 #include "Functions.h"
-#include "Entity.h"
+#include "Enemy.h"
 
 using namespace std;
 
