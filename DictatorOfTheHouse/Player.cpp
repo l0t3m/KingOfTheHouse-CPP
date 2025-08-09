@@ -190,7 +190,7 @@ namespace Entity
 	{
 		cout << "--> STATS:";
 		cout << "\n| [lvl." + to_string(this->Level) + "] " + this->Name + " | " + to_string(this->HP) + "/" + to_string(this->MaxHP) + "HP";
-		cout << "\n| " + to_string(this->BaseDamage) + " base damage" << endl;
+		cout << "\n|  " + to_string(this->BaseDamage) + " base damage" << endl;
 
 		this->PrintWeapons();
 	}

@@ -168,9 +168,7 @@ namespace Combat
         }
 
         if (enemy->IsAlive)
-        {
             Attack(enemy, player);
-        }
         else
             EndFight(player, enemy);
     }
